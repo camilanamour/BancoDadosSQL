@@ -24,23 +24,23 @@ FOREIGN KEY (Atributo 4) REFERENCES tab1(PK)
 )
 */
 CREATE TABLE produto(
-codProduto		INT				NOT NULL,
-nomeProduto		VARCHAR(20)		NOT NULL,
-valorUnitario	DECIMAL(7,2)	NOT NULL
+codProduto					INT				NOT NULL,
+nomeProduto					VARCHAR(20)		NOT NULL,
+valorUnitario				DECIMAL(7,2)	NOT NULL
 PRIMARY KEY (codProduto)
 )
 
 CREATE TABLE pedido(
-codPedido		INT				NOT NULL,
-dataPedido		DATE			NOT NULL
+codPedido					INT				NOT NULL,
+dataPedido					DATE			NOT NULL
 PRIMARY KEY (codPedido)
 )
 GO
 CREATE TABLE produto_pedido(
-codProduto		INT				NOT NULL,
-codPedido		INT				NOT NULL,
-qtde			INT				NOT NULL,
-valorTotal		DECIMAL(7,2)	NOT NULL
+codProduto					INT				NOT NULL,
+codPedido					INT				NOT NULL,
+qtde						INT				NOT NULL,
+valorTotal					DECIMAL(7,2)	NOT NULL
 PRIMARY KEY (codProduto, codPedido)
 FOREIGN KEY (codProduto) REFERENCES produto (codProduto),
 FOREIGN KEY (codPedido) REFERENCES pedido (codPedido)
