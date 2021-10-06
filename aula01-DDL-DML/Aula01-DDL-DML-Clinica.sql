@@ -5,40 +5,40 @@ USE clinica
 
 -- Criar as tabelas (entidades)
 CREATE TABLE paciente(
-numBeneficio				INT						NOT NULL,
-nome						VARCHAR(100)			NOT NULL,
-logradouro					VARCHAR(200)			NOT NULL,
-numero						INT						NOT NULL,
-cep							CHAR(8)					NOT NULL,
-complemento					VARCHAR(255)			NULL,
-telefone					VARCHAR(11)				NOT NULL
+numBeneficio INT           NOT NULL,
+nome		 VARCHAR(100)  NOT NULL,
+logradouro   VARCHAR(200)  NOT NULL,
+numero       INT           NOT NULL,
+cep          CHAR(8)       NOT NULL,
+complemento  VARCHAR(255)  NULL,
+telefone     VARCHAR(11)   NOT NULL
 PRIMARY KEY (numBeneficio)
 )
 
 CREATE TABLE especialidade(
-idEspecialidade				INT						NOT NULL,
-especialidade				VARCHAR(100)			NOT NULL
+idEspecialidade INT          NOT NULL,
+especialidade   VARCHAR(100) NOT NULL
 PRIMARY KEY(idEspecialidade)
 )
 
 CREATE TABLE medico(
-codMedico					INT						NOT NULL,
-nome						VARCHAR(100)			NOT NULL,
-logradouro					VARCHAR(200)			NOT NULL,
-numero						INT						NOT NULL,
-cep							CHAR(8)					NOT NULL,
-complemento					VARCHAR(255)			NULL,
-contato						VARCHAR(11)				NOT NULL,
-idEspecialidade				INT						NOT NULL
+codMedico     INT	         NOT NULL,
+nome          VARCHAR(100) NOT NULL,
+logradouro    VARCHAR(200) NOT NULL,
+numero        INT          NOT NULL,
+cep           CHAR(8)      NOT NULL,
+complemento   VARCHAR(255) NULL,
+contato       VARCHAR(11)  NOT NULL,
+idEspecialidade INT    NOT NULL
 PRIMARY KEY (codMedico)
 FOREIGN KEY (idEspecialidade) REFERENCES especialidade(idEspecialidade)
 )
 
 CREATE TABLE consulta(
-numBeneficio				INT						NOT NULL,
-codMedico					INT						NOT NULL,
-dataHora					DATETIME				NOT NULL,
-observacao					VARCHAR(255)			NOT NULL
+numBeneficio  INT          NOT NULL,
+codMedico     INT          NOT NULL,
+dataHora      DATETIME     NOT NULL,
+observacao    VARCHAR(255) NOT NULL
 PRIMARY KEY (numBeneficio, codMedico, dataHora)
 FOREIGN KEY (numBeneficio) REFERENCES paciente(numBeneficio),
 FOREIGN KEY (codMedico) REFERENCES medico(codMedico)
