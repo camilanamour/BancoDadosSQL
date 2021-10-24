@@ -69,6 +69,7 @@ DROP TABLE Locacao
 EXEC sp_help 
 EXEC sp_help Estrela
 
+-- Inserir dados
 INSERT INTO Filme VALUES
 ('Whiplash', 2015),
 ('Birdman', 2015),
@@ -133,3 +134,86 @@ SELECT * FROM DVD
 SELECT * FROM Cliente
 SELECT * FROM Locacao
 
+-- Os CEP dos clientes 5503 e 5504 são 08411150 e 02918190 respectivamente
+UPDATE Cliente
+SET cep = '08411150'
+WHERE num_cadastro = 5503
+
+UPDATE Cliente
+SET cep = '02918190'
+WHERE num_cadastro = 5504
+
+-- A locação de 2021-02-18 do cliente 5502 teve o valor de 3.25 para cada DVD alugado
+UPDATE Locacao
+SET valor = 3.25
+WHERE data_locacao = '2021-02-18' AND num_cadastro = 5502
+
+-- A locação de 2021-02-24 do cliente 5501 teve o valor de 3.10 para cada DVD alugado
+UPDATE Locacao
+SET valor = 3.10
+WHERE data_locacao = '2021-02-24' AND num_cadastro = 5501
+
+-- O DVD 10005 foi fabricado em 2019-07-14
+UPDATE DVD
+SET data_fabricacao = '2019-07-14'
+WHERE num = 10005
+
+-- O nome real de Miles Teller é Miles Alexander Teller
+UPDATE Estrela
+SET nome_real = 'Miles Alexander Teller'
+WHERE nome = 'Miles Teller'
+
+-- O filme Sing não tem DVD cadastrado e deve ser excluído
+DELETE Filme
+WHERE titulo = 'Sing'
+
+-- CONSULTAR
+-- 1) Fazer um select que retorne os nomes dos filmes de 2014
+SELECT titulo
+FROM Filme
+WHERE ano = 2014
+
+-- 2) Fazer um select que retorne o id e o ano do filme Birdman
+SELECT id, ano
+FROM Filme
+WHERE titulo = 'Birdman'
+
+-- 3) Fazer um select que retorne o id e o ano do filme que chama ___plash
+SELECT id, ano
+FROM Filme
+WHERE titulo LIKE '%plash'
+
+-- 4) Fazer um select que retorne o id, o nome e o nome_real da estrela 
+-- cujo nome começa com Steve
+SELECT id, nome, nome_real
+FROM Estrela
+WHERE nome LIKE 'Steve%'
+
+-- 5) Fazer um select que retorne FilmeId e a data_fabricação em formato (DD/MM/YYYY) 
+-- (apelidar de fab) dos filmes fabricados a partir de 01-01-2020
+SELECT id_filme, CONVERT(CHAR(10), data_fabricacao, 103) AS fab
+FROM DVD
+WHERE data_fabricacao > '2020-01-01'
+
+-- 6) Fazer um select que retorne DVDnum, data_locacao, data_devolucao, 
+-- valor e valor com multa de acréscimo de 2.00 da locação do cliente 5505
+SELECT num_DVD, data_locacao, data_devolucao, valor, valor + 2.00 AS multa
+FROM Locacao
+WHERE num_cadastro = 5505
+
+-- 7) Fazer um select que retorne Logradouro, num e CEP de Matilde Luz
+SELECT logradouro, numero, cep
+FROM Cliente
+WHERE nome = 'Matilde Luz'
+
+-- 8) Fazer um select que retorne Nome real de Michael Keaton
+SELECT nome_real
+FROM Estrela
+WHERE nome = 'Michael Keaton'
+
+-- 9) Fazer um select que retorne o num_cadastro, o nome e o endereço completo, 
+-- concatenando (logradouro, numero e CEP), apelido end_comp, dos clientes cujo ID 
+-- é maior ou igual 5503
+SELECT num_cadastro, nome, logradouro + ', ' + CONVERT(CHAR(3), numero) + ', ' + cep AS end_comp
+FROM Cliente
+WHERE num_cadastro >= 5503
