@@ -58,39 +58,6 @@ SELECT DATEDIFF(WEEK, '2021-07-28', GETDATE()) AS semanas_aula
 SELECT DATEDIFF(YEAR, '2019-07-25', GETDATE()) AS anos_fatec -- anos inconsistência
 ---------------------------------------------------------------------------------------
 
-CREATE TABLE funcionario(
-id			INT				NOT NULL	IDENTITY(1,1),
-nome		VARCHAR(100)	NOT NULL,
-sobrenome	VARCHAR(200)	NOT NULL,
-logradouro	VARCHAR(200)	NOT NULL,
-numero		INT				NOT NULL	CHECK(numero > 0),
-bairro		VARCHAR(100)	NULL,
-cep			CHAR(8)			NULL		CHECK(LEN(cep) = 8),
-ddd			CHAR(2)			NULL		DEFAULT('11'),
-telefone	CHAR(8)			NULL		CHECK (LEN(telefone) = 8),
-data_nasc	DATETIME		NOT NULL	CHECK (data_nasc < GETDATE()),
-salario		DECIMAL(7,2)	NOT NULL	CHECK (salario > 0)
-PRIMARY KEY (id)
-)
-GO
-CREATE TABLE projeto(
-codigo		INT				NOT NULL	IDENTITY(1001, 1),
-nome		VARCHAR(200)	NOT NULL	UNIQUE,
-descricao	VARCHAR(300)	NULL
-PRIMARY KEY(codigo)
-)
-GO
-CREATE TABLE funcproj(
-id_funcionario	INT			NOT NULL,
-codigo_projeto	INT			NOT NULL,
-data_inicio		DATE	NOT NULL,
-data_fim		DATE	NOT NULL,
-CONSTRAINT chk_dt CHECK(data_fim > data_inicio),
-PRIMARY KEY (id_funcionario, codigo_projeto),
-FOREIGN KEY (id_funcionario) REFERENCES funcionario(id),
-FOREIGN KEY (codigo_projeto) REFERENCES projeto(codigo)
-)
-
 EXEC sp_help funcionario
 EXEC sp_help projeto
 EXEC sp_help funcproj
