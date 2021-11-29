@@ -1,0 +1,13 @@
+﻿codProduto  nomeProduto          valorUnitario                           descricao
+----------- -------------------- --------------------------------------- ----------------------------------------------------------------------------------------------------
+1           Mouse                25.90                                   Mouse simples de 2 botões
+2           Pen Drive            51.90                                   Pen Drive de 64 GB
+3           Monitor              90.80                                   Monitor de 21 polegadas 4k, HDMI, com entrada DVI e VGA, multi resoluções e alimentação interna
+4           Teclado              50.90                                   Teclado simples
+5           Cabo Rede            10.90                                   NULL
+6           Cabo USB             10.90                                   NULL
+
+(6 linhas afetadas)
+
+
+Horário de conclusão: 2021-10-05T17:03:01.0505456-03:00
