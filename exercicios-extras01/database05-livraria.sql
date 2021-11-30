@@ -1,6 +1,6 @@
-CREATE DATABASE ex9
+CREATE DATABASE aula_ex_livraria
 GO
-USE ex9
+USE aula_ex_livraria
 GO
 CREATE TABLE editora (
 codigo			INT				NOT NULL,
